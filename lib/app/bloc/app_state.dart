@@ -1,3 +1,4 @@
+/// AppState
 class AppState {
   final int index;
 

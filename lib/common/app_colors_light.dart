@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// AppColorsLight
 class AppColorsLight {
   AppColorsLight._();
 
@@ -38,4 +39,24 @@ class AppColorsLight {
   static const darkBackgroundSubtle = Color(0xFFced4da);
   static const darkBorderSubtle = Color(0xFFadb5bd);
   static const darkTextEmphasis = Color(0xFF495057);
+
+  static const alertPrimaryColor = Color(0xFF052c65);
+  static const alertPrimaryBackgroundColor = Color(0xFFcfe2ff);
+  static const alertPrimaryBorderColor = Color(0xFF9ec5fe);
+  static const alertPrimaryLinkColor = Color(0xFF052c65);
+
+  static const alertDangerColor = Color(0xFF58151c);
+  static const alertDangerBackgroundColor = Color(0xFFf8d7da);
+  static const alertDangerBorderColor = Color(0xFFf1aeb5);
+  static const alertDangerLinkColor = Color(0xFF58151c);
+
+  static const alertSuccessColor = Color(0xFF0a3622);
+  static const alertSuccessBackgroundColor = Color(0xFFd1e7dd);
+  static const alertSuccessBorderColor = Color(0xFFa3cfbb);
+  static const alertSuccessLinkColor = Color(0xFF0a3622);
+
+  static const alertWarningColor = Color(0xFF664d03);
+  static const alertWarningBackgroundColor = Color(0xFFfff3cd);
+  static const alertWarningBorderColor = Color(0xFFffe69c);
+  static const alertWarningLinkColor = Color(0xFF664d03);
 }

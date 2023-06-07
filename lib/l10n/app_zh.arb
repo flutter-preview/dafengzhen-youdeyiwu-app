@@ -1,0 +1,44 @@
+{
+  "@@locale" : "zh",
+  "appName" : "尤得一物",
+  "appNameAbbr" : "youdeyiwu",
+  "accountExists": "已经存在账号?",
+  "loginStart": "开始登录吧",
+  "welcomeMessage": "欢迎来到{appName}",
+  "@welcomeMessage": {
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "尤得一物"
+      }
+    }
+  },
+  "inputPrompt": "输入您的信息开始吧",
+  "account": "账号",
+  "accountEmptyError": "账号不能为空!",
+  "accountInputPrompt": "请输入账号",
+  "password": "密码",
+  "passwordEmptyError": "密码不能为空!",
+  "passwordInputPrompt": "请输入密码",
+  "quickRegistration": "快速注册",
+  "agreementText": "我已阅读并同意",
+  "serviceAgreement": "《服务协议》",
+  "andText": "和",
+  "privacyPolicy": "《隐私政策》",
+  "registrationSuccess": "注册完成",
+  "registrationFailure": "注册失败",
+  "reloadingSoon": "即将重新加载",
+  "loginSuccess": "登录完成",
+  "loginFailure": "登录失败",
+  "unknownErrorOccurred": "抱歉，发生了未知错误",
+  "pleaseTryRefreshing": "请尝试重新刷新",
+  "termsAndConditions": "请阅读并同意服务协议和隐私政策!",
+  "invalidCredentialsFormat": "账号或密码格式不正确!",
+  "accountLengthRange": "账号支持长度最小 3，最大 16",
+  "passwordLengthRange": "密码支持长度最小 6，最大 19",
+  "unknownError": "未知错误",
+  "verificationCode": "验证码",
+  "enterVerificationCode": "请输入验证码",
+  "verificationCodeEmptyError": "验证码不能为空!",
+  "operationTooFrequentPleaseTryAgainLater": "操作太频繁，请稍后再试!"
+}

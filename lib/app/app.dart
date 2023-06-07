@@ -7,6 +7,7 @@ import 'package:youdeyiwu_app/app/bloc/app_event.dart';
 import 'package:youdeyiwu_app/app/bloc/app_state.dart';
 import 'package:youdeyiwu_app/register/register.dart';
 
+/// App
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
@@ -14,6 +15,7 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
+/// _AppState
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {

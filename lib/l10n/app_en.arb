@@ -1,0 +1,44 @@
+{
+  "@@locale" : "en",
+  "appName" : "youdeyiwu",
+  "appNameAbbr" : "youdeyiwu",
+  "accountExists": "Account already exists?",
+  "loginStart": "Start logging in",
+  "welcomeMessage": "Welcome to {appName}",
+  "@welcomeMessage": {
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "youdeyiwu"
+      }
+    }
+  },
+  "inputPrompt": "Enter your information to get started",
+  "account": "Account",
+  "accountEmptyError": "Account cannot be empty!",
+  "accountInputPrompt": "Please enter your account",
+  "password": "Password",
+  "passwordEmptyError": "Password cannot be empty!",
+  "passwordInputPrompt": "Please enter your password",
+  "quickRegistration": "Quick Registration",
+  "agreementText": "I have read and agree to the",
+  "serviceAgreement": "Service Agreement",
+  "andText": "and",
+  "privacyPolicy": "Privacy Policy",
+  "registrationSuccess": "Registration completed",
+  "registrationFailure": "Registration failed",
+  "reloadingSoon": "Reloading soon",
+  "loginSuccess": "Login successful",
+  "loginFailure": "Login failed",
+  "unknownErrorOccurred": "Sorry, an unknown error occurred",
+  "pleaseTryRefreshing": "Please try refreshing",
+  "termsAndConditions": "Please read and agree to the Terms of Service and Privacy Policy!",
+  "invalidCredentialsFormat": "Incorrect account or password format!",
+  "accountLengthRange": "The account supports a minimum length of 3 and a maximum length of 16",
+  "passwordLengthRange": "The account supports a minimum length of 6 and a maximum length of 19",
+  "unknownError": "Unknown Error",
+  "verificationCode": "Verification Code",
+  "enterVerificationCode": "Please Enter Verification Code",
+  "verificationCodeEmptyError": "Verification Code cannot be empty!",
+  "operationTooFrequentPleaseTryAgainLater": "Too many operations, please try again later!"
+}

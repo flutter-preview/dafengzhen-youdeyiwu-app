@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
+import 'package:youdeyiwu_app/register/bloc/register_controller.dart';
 import 'package:youdeyiwu_app/register/bloc/register_state.dart';
+import 'package:youdeyiwu_app/register/widget/logo.dart';
+import 'package:youdeyiwu_app/register/widget/placeholder.dart';
+import 'package:youdeyiwu_app/register/widget/switch_login.dart';
+import 'package:youdeyiwu_app/register/widget/user_agreement.dart';
+import 'package:youdeyiwu_app/register/widget/username.dart';
+import 'package:youdeyiwu_app/register/widget/welcome_message.dart';
+import 'package:youdeyiwu_app/tool/tool.dart';
 
+/// Register
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -12,18 +20,34 @@ class Register extends StatefulWidget {
   State<Register> createState() => _RegisterState();
 }
 
+/// _RegisterState
 class _RegisterState extends State<Register> {
-  final _textController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
+  final _usernameTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _codeTextController = TextEditingController();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+  DateTime _lastRefreshTime = DateTime.now();
+
+  Future<void> _onRefresh() async {
+    if (DateTime.now().difference(_lastRefreshTime) < Duration(seconds: 5)) {
+      showSnackBar(
+        context: context,
+        e: AppLocalizations.of(context)!
+            .operationTooFrequentPleaseTryAgainLater,
+      );
+      return;
+    }
+
+    await RegisterController(context: context).refreshCaptchaImage();
+    _lastRefreshTime = DateTime.now();
+  }
 
   @override
   void initState() {
     super.initState();
-
-    _focusNode.addListener(() {
-      setState(() {});
-    });
+    RegisterController(context: context).init();
   }
 
   @override
@@ -32,186 +56,29 @@ class _RegisterState extends State<Register> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 40.h),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      "assets/images/logo.svg",
-                      semanticsLabel: 'logo',
-                      width: 48.w,
-                      height: 48.h,
+            body: RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: _onRefresh,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    logo(),
+                    loginMessage(context: context),
+                    welcomeMessage(context: context),
+                    Usernmae(
+                      context: context,
+                      state: state,
+                      formKey: _formKey,
+                      usernameTextController: _usernameTextController,
+                      passwordTextController: _passwordTextController,
+                      codeTextController: _codeTextController,
                     ),
-                  ),
+                    userAgreement(context: context, state: state),
+                    placeholder()
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(40.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "已经存在账号?",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                            textStyle: Theme.of(context).textTheme.titleMedium),
-                        onPressed: () {},
-                        child: Text(
-                          "开始登录吧",
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w, bottom: 40.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "欢迎来到尤得一物",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      Text(
-                        "输入您的信息开始吧",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "账号",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "账号不能为空！";
-                                }
-                                return null;
-                              },
-                              focusNode: _focusNode,
-                              controller: _textController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: "请输入账号",
-                                prefixIcon: Icon(Icons.person),
-                                suffixIcon: _focusNode.hasFocus
-                                    ? IconButton(
-                                        onPressed: () {
-                                          _textController.clear();
-                                        },
-                                        icon: Icon(Icons.clear),
-                                      )
-                                    : null,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Text(
-                              "密码",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "密码不能为空！";
-                                }
-                                return null;
-                              },
-                              focusNode: _focusNode,
-                              controller: _textController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: "请输入密码",
-                                prefixIcon: Icon(Icons.lock),
-                                suffixIcon: _focusNode.hasFocus
-                                    ? IconButton(
-                                        onPressed: () {
-                                          _textController.clear();
-                                        },
-                                        icon: Icon(Icons.clear),
-                                      )
-                                    : null,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(32.h),
-                              child: Center(
-                                child: ElevatedButton.icon(
-                                  icon: Icon(Icons.person_add),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      _focusNode.unfocus();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(content: Text("Great!")),
-                                      );
-                                    }
-                                  },
-                                  label: Text(
-                                    "快速注册",
-                                  ),
-                                  style: ButtonStyle(
-                                    textStyle: MaterialStatePropertyAll(
-                                        Theme.of(context)
-                                            .textTheme
-                                            .titleMedium),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      // Padding(
-                      //   padding: EdgeInsets.all(32.h),
-                      //   child: Center(
-                      //     child: MaterialButton(
-                      //       onPressed: () {
-                      //         print(_textController.text);
-                      //       },
-                      //       child: Text(
-                      //         "快速注册",
-                      //         style: Theme.of(context)
-                      //             .textTheme
-                      //             .titleMedium
-                      //             ?.copyWith(color: Colors.white70),
-                      //       ),
-                      //       color: Theme.of(context).colorScheme.primary,
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         );
