@@ -11,12 +11,13 @@ class UsernameRegisterDto {
   String? cid;
   String? code;
 
-  UsernameRegisterDto(
-      {required this.username,
-      required this.password,
-      this.alias,
-      this.cid,
-      this.code});
+  UsernameRegisterDto({
+    required this.username,
+    required this.password,
+    this.alias,
+    this.cid,
+    this.code,
+  });
 
   factory UsernameRegisterDto.fromJson(Map<String, dynamic> json) =>
       _$UsernameRegisterDtoFromJson(json);

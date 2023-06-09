@@ -40,5 +40,11 @@
   "verificationCode": "验证码",
   "enterVerificationCode": "请输入验证码",
   "verificationCodeEmptyError": "验证码不能为空!",
-  "operationTooFrequentPleaseTryAgainLater": "操作太频繁，请稍后再试!"
+  "operationTooFrequentPleaseTryAgainLater": "操作太频繁，请稍后再试!",
+  "noAccountYet": "还没有账号吗?",
+  "startRegistration": "开始注册吧",
+  "loginToYourAccount": "登录您的账号",
+  "loginNow": "马上登录",
+  "smsLogin": "短信登录",
+  "emailLogin": "邮箱登录"
 }

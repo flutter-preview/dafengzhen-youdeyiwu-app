@@ -3,15 +3,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
 import 'package:youdeyiwu_app/enums/snack_bar_enum.dart';
 import 'package:youdeyiwu_app/exception/custom_exception.dart';
-import 'package:youdeyiwu_app/service/global_service.dart';
+import 'package:youdeyiwu_app/service/global/global_service.dart';
 
 /// showSnackBar
-void showSnackBar({
-  required BuildContext context,
-  dynamic e,
-  dynamic stackTrace,
-  SnackBarTypeEnum type = SnackBarTypeEnum.danger,
-}) {
+void showSnackBar(
+    {required BuildContext context,
+    dynamic e,
+    dynamic stackTrace,
+    SnackBarTypeEnum type = SnackBarTypeEnum.danger,
+    Duration? duration}) {
   String message = AppLocalizations.of(context)!.unknownError;
   if (e is CustomException) {
     GlobalService.logger.e('Custom exception', e, stackTrace);
@@ -24,6 +24,7 @@ void showSnackBar({
   var colorMap = _getSnackBarColor(type);
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      duration: duration ?? const Duration(seconds: 2),
       backgroundColor: colorMap['backgroundColor'],
       content: Text(
         message,

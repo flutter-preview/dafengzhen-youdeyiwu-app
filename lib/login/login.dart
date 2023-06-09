@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
-import 'package:youdeyiwu_app/register/bloc/register_controller.dart';
-import 'package:youdeyiwu_app/register/bloc/register_state.dart';
-import 'package:youdeyiwu_app/register/widget/logo.dart';
-import 'package:youdeyiwu_app/register/widget/placeholder.dart';
-import 'package:youdeyiwu_app/register/widget/switch_login.dart';
-import 'package:youdeyiwu_app/register/widget/user_agreement.dart';
-import 'package:youdeyiwu_app/register/widget/username.dart';
-import 'package:youdeyiwu_app/register/widget/welcome_message.dart';
+import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
+import 'package:youdeyiwu_app/login/bloc/login_controller.dart';
+import 'package:youdeyiwu_app/login/bloc/login_state.dart';
+import 'package:youdeyiwu_app/login/widget/logo.dart';
+import 'package:youdeyiwu_app/login/widget/placeholder.dart';
+import 'package:youdeyiwu_app/login/widget/switch_register.dart';
+import 'package:youdeyiwu_app/login/widget/username.dart';
+import 'package:youdeyiwu_app/login/widget/welcome_message.dart';
 import 'package:youdeyiwu_app/tool/api_client.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
 
-/// Register
-class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+/// Login
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-/// _RegisterState
-class _RegisterState extends State<Register> {
+/// _LoginState
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _usernameTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
@@ -43,7 +42,8 @@ class _RegisterState extends State<Register> {
 
     var apiClient = ApiClient();
     try {
-      await RegisterController(context: context).refreshCaptchaImage();
+      await LoginController(context: context)
+          .refreshCaptchaImage(apiClient: apiClient);
       _lastRefreshTime = DateTime.now();
     } catch (e, stackTrace) {
       showSnackBar(context: context, e: e, stackTrace: stackTrace);
@@ -55,12 +55,12 @@ class _RegisterState extends State<Register> {
   @override
   void initState() {
     super.initState();
-    RegisterController(context: context).init();
+    LoginController(context: context).init();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterBloc, RegisterState>(
+    return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
@@ -72,7 +72,7 @@ class _RegisterState extends State<Register> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     logo(),
-                    loginMessage(context: context),
+                    registerMessage(context: context),
                     welcomeMessage(context: context),
                     Usernmae(
                       context: context,
@@ -82,7 +82,6 @@ class _RegisterState extends State<Register> {
                       passwordTextController: _passwordTextController,
                       codeTextController: _codeTextController,
                     ),
-                    userAgreement(context: context, state: state),
                     placeholder()
                   ],
                 ),

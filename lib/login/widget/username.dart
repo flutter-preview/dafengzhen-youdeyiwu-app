@@ -5,24 +5,25 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
-import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
-import 'package:youdeyiwu_app/register/bloc/register_controller.dart';
-import 'package:youdeyiwu_app/register/bloc/register_event.dart';
-import 'package:youdeyiwu_app/register/bloc/register_state.dart';
-import 'package:youdeyiwu_app/register/widget/submit_btn.dart';
+import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
+import 'package:youdeyiwu_app/login/bloc/login_controller.dart';
+import 'package:youdeyiwu_app/login/bloc/login_event.dart';
+import 'package:youdeyiwu_app/login/bloc/login_state.dart';
+import 'package:youdeyiwu_app/login/widget/submit_btn.dart';
 import 'package:youdeyiwu_app/service/global/bloc/global_bloc.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
 
 /// Usernmae
 Widget Usernmae({
   required BuildContext context,
-  required RegisterState state,
+  required LoginState state,
   required GlobalKey<FormState> formKey,
   required TextEditingController usernameTextController,
   required TextEditingController passwordTextController,
   required TextEditingController codeTextController,
 }) {
   var globalState = context.read<GlobalBloc>().state;
+  var enable = globalState.path?.imageConfig?.enable == true;
 
   return Padding(
     padding: EdgeInsets.all(16.w),
@@ -49,7 +50,7 @@ Widget Usernmae({
                   return null;
                 },
                 onChanged: (value) {
-                  context.read<RegisterBloc>().add(UsernameEvent(value));
+                  context.read<LoginBloc>().add(UsernameEvent(value));
                 },
                 controller: usernameTextController,
                 prefixIcon: const Icon(Icons.person),
@@ -74,7 +75,7 @@ Widget Usernmae({
                   return null;
                 },
                 onChanged: (value) {
-                  context.read<RegisterBloc>().add(PasswordEvent(value));
+                  context.read<LoginBloc>().add(PasswordEvent(value));
                 },
                 controller: passwordTextController,
                 prefixIcon: const Icon(Icons.lock),
@@ -85,7 +86,7 @@ Widget Usernmae({
               SizedBox(
                 height: 16.h,
               ),
-              if (globalState.path?.imageConfig?.enable == true)
+              if (enable)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -109,7 +110,7 @@ Widget Usernmae({
                             },
                             onChanged: (value) {
                               context
-                                  .read<RegisterBloc>()
+                                  .read<LoginBloc>()
                                   .add(VerificationCodeEvent(value));
                             },
                             controller: codeTextController,
@@ -137,7 +138,7 @@ Widget Usernmae({
 
 /// buildVerificationCodeUrl
 Widget buildVerificationCodeUrl(
-    {required BuildContext context, required RegisterState state}) {
+    {required BuildContext context, required LoginState state}) {
   DateTime lastRefreshTime = DateTime.now();
 
   Future<void> onRefresh() async {
@@ -150,7 +151,7 @@ Widget buildVerificationCodeUrl(
       return;
     }
 
-    await RegisterController(context: context).refreshCaptchaImage();
+    await LoginController(context: context).refreshCaptchaImage();
     lastRefreshTime = DateTime.now();
   }
 

@@ -40,5 +40,11 @@
   "verificationCode": "Verification Code",
   "enterVerificationCode": "Please Enter Verification Code",
   "verificationCodeEmptyError": "Verification Code cannot be empty!",
-  "operationTooFrequentPleaseTryAgainLater": "Too many operations, please try again later!"
+  "operationTooFrequentPleaseTryAgainLater": "Too many operations, please try again later!",
+  "noAccountYet": "Don't have an account yet?",
+  "startRegistration": "Start registration now",
+  "loginToYourAccount": "Login to your account",
+  "loginNow": "Login now",
+  "smsLogin": "SMS login",
+  "emailLogin": "Email login"
 }

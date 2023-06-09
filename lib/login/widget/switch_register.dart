@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/constants/app_routes.dart';
 
 /// loginMessage
-Widget loginMessage({required BuildContext context}) {
+Widget registerMessage({required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.all(40.h),
     child: Row(
@@ -12,7 +12,7 @@ Widget loginMessage({required BuildContext context}) {
       children: [
         Flexible(
           child: Text(
-            AppLocalizations.of(context)!.accountExists,
+            AppLocalizations.of(context)!.noAccountYet,
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
@@ -20,10 +20,10 @@ Widget loginMessage({required BuildContext context}) {
           style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.titleMedium),
           onPressed: () {
-            Navigator.of(context).pushNamed(AppRoutes.login);
+            Navigator.of(context).pushNamed(AppRoutes.register);
           },
           child: Text(
-            AppLocalizations.of(context)!.loginStart,
+            AppLocalizations.of(context)!.startRegistration,
           ),
         )
       ],

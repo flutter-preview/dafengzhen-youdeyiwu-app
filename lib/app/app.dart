@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
 import 'package:youdeyiwu_app/app/bloc/app_event.dart';
 import 'package:youdeyiwu_app/app/bloc/app_state.dart';
-import 'package:youdeyiwu_app/register/register.dart';
 
 /// App
 class App extends StatefulWidget {
@@ -25,7 +24,9 @@ class _AppState extends State<App> {
         child: SafeArea(
             child: Scaffold(
           body: [
-            const Register(),
+            Center(
+              child: Text("1"),
+            ),
             Center(
               child: Text("2"),
             ),
