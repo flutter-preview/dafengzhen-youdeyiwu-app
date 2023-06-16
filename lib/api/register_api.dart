@@ -10,7 +10,8 @@ class RegisterApi {
       {ApiClient? apiClient, required UsernameRegisterDto body}) async {
     var response = await (apiClient ?? ApiClient())
         .post(Uri.parse("/register/username"), body: body);
-    var decodedResponse = jsonDecode(response.body) as Map<String, dynamic>;
+    var decodedResponse =
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     return TokenVo.withDataResponse(decodedResponse);
   }
 }

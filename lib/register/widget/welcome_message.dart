@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youdeyiwu_app/constants/app_constant.dart';
 
 /// welcomeMessage
 Widget welcomeMessage({required BuildContext context}) {
@@ -12,7 +13,7 @@ Widget welcomeMessage({required BuildContext context}) {
       children: [
         Text(
           AppLocalizations.of(context)!
-              .welcomeMessage(dotenv.get('APP_NAME', fallback: "尤得一物")),
+              .welcomeMessage(dotenv.get(AppConstant.appName)),
           style: Theme.of(context)
               .textTheme
               .titleLarge

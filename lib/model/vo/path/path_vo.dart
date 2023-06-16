@@ -8,7 +8,7 @@ import 'package:youdeyiwu_app/model/vo/path/post_config_vo.dart';
 import 'package:youdeyiwu_app/model/vo/path/post_other_vo.dart';
 import 'package:youdeyiwu_app/model/vo/path/qq_config_vo.dart';
 import 'package:youdeyiwu_app/model/vo/path/site_config_vo.dart';
-import 'package:youdeyiwu_app/model/vo/path/user_ov_vo.dart';
+import 'package:youdeyiwu_app/model/vo/user/user_ov_vo.dart';
 
 part 'path_vo.g.dart';
 

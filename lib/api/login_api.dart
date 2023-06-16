@@ -10,7 +10,8 @@ class LoginApi {
       {ApiClient? apiClient, required UsernameLoginDto body}) async {
     var response = await (apiClient ?? ApiClient())
         .post(Uri.parse("/login/username"), body: body);
-    var decodedResponse = jsonDecode(response.body) as Map<String, dynamic>;
+    var decodedResponse =
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     return TokenVo.withDataResponse(decodedResponse);
   }
 }

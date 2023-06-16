@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:youdeyiwu_app/constants/app_constant.dart';
 import 'package:youdeyiwu_app/exception/custom_exception.dart';
 import 'package:youdeyiwu_app/model/response/data_response.dart';
 
 /// ApiClient
 class ApiClient extends http.BaseClient {
-  final baseUri = Uri.parse(dotenv.get("APP_API_SERVER"));
+  final baseUri = Uri.parse(dotenv.get(AppConstant.appApiServer));
   final http.Client _inner = http.Client();
   final contentTypeName = "content-type";
   final contentTypeValue = "application/json";

@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/app/app.dart';
 import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
 import 'package:youdeyiwu_app/common/app_theme_data.dart';
+import 'package:youdeyiwu_app/constants/app_constant.dart';
 import 'package:youdeyiwu_app/constants/app_routes.dart';
+import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
 import 'package:youdeyiwu_app/login/login.dart';
 import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
@@ -32,6 +34,9 @@ class MyApp extends MultiBlocProvider {
               create: (context) => AppBloc(),
             ),
             BlocProvider(
+              create: (context) => HomeBloc(),
+            ),
+            BlocProvider(
               create: (context) => LoginBloc(),
             ),
             BlocProvider(
@@ -39,13 +44,14 @@ class MyApp extends MultiBlocProvider {
             ),
           ],
           child: ScreenUtilInit(
+            designSize: const Size(390, 844),
             builder: (context, child) => MaterialApp(
               locale: const Locale("zh"),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               debugShowCheckedModeBanner: false,
               title: 'youdeyiwu',
-              onGenerateTitle: (context) => dotenv.get("APP_NAME_ABBR"),
+              onGenerateTitle: (context) => dotenv.get(AppConstant.appNameAbbr),
               theme: AppThemeData.lightTheme,
               darkTheme: AppThemeData.darkTheme,
               themeMode: ThemeMode.light,

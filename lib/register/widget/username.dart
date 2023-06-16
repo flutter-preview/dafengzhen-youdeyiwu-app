@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
+import 'package:youdeyiwu_app/constants/app_constant.dart';
 import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
 import 'package:youdeyiwu_app/register/bloc/register_controller.dart';
 import 'package:youdeyiwu_app/register/bloc/register_event.dart';
@@ -162,7 +163,7 @@ Widget buildVerificationCodeUrl(
         onTap: onRefresh,
         child: Image(
           image: NetworkImage(
-            "${dotenv.get("APP_API_SERVER")}/captcha/image/${state.verificationCodeId}",
+            "${dotenv.get(AppConstant.appApiServer)}/captcha/image/${state.verificationCodeId}",
           ),
           width: 100,
           height: 56,

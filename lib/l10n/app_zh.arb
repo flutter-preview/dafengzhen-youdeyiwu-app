@@ -46,5 +46,20 @@
   "loginToYourAccount": "登录您的账号",
   "loginNow": "马上登录",
   "smsLogin": "短信登录",
-  "emailLogin": "邮箱登录"
+  "emailLogin": "邮箱登录",
+  "searchQuery": "请输入搜索内容",
+  "relatedContent": "相关内容",
+  "allContent": "所有内容",
+  "allPost": "所有帖子",
+  "more": "更多",
+  "secondsAgo": "秒前",
+  "minutesAgo": "分钟前",
+  "hoursAgo": "小时前",
+  "daysAgo": "天前",
+  "noDescriptionAvailable": "暂无描述",
+  "hello": "您好",
+  "anonymousUsername": "无名大侠",
+  "noMoreData": "暂无更多数据",
+  "noData": "暂无数据",
+  "dataNotFound": "数据不存在"
 }

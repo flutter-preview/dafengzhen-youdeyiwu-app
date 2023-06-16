@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:youdeyiwu_app/model/response/data_response.dart';
-import 'package:youdeyiwu_app/model/vo/path/role_vo.dart';
-import 'package:youdeyiwu_app/model/vo/path/statistic_vo.dart';
-import 'package:youdeyiwu_app/model/vo/path/user_details_vo.dart';
+import 'package:youdeyiwu_app/model/vo/role/role_vo.dart';
+import 'package:youdeyiwu_app/model/vo/statistic/statistic_vo.dart';
+import 'package:youdeyiwu_app/model/vo/user/user_details_vo.dart';
 
 part 'user_ov_vo.g.dart';
 

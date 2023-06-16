@@ -50,6 +50,7 @@ dependencies:
   encrypt: ^5.0.1
   json_annotation: ^4.8.1
   logger: ^1.4.0
+  easy_debounce: ^2.0.3
 
 dev_dependencies:
   flutter_test:

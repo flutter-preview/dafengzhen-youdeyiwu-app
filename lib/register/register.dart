@@ -59,6 +59,14 @@ class _RegisterState extends State<Register> {
   }
 
   @override
+  void dispose() {
+    _usernameTextController.dispose();
+    _passwordTextController.dispose();
+    _codeTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterBloc, RegisterState>(
       builder: (context, state) {
