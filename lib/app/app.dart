@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
 import 'package:youdeyiwu_app/app/bloc/app_event.dart';
 import 'package:youdeyiwu_app/app/bloc/app_state.dart';
+import 'package:youdeyiwu_app/content/content.dart';
 import 'package:youdeyiwu_app/home/home.dart';
 
 /// App
@@ -23,9 +24,7 @@ class _AppState extends State<App> {
           child: Scaffold(
         body: [
           Home(),
-          Center(
-            child: Text("2"),
-          ),
+          Content(),
           Center(
             child: Text("3"),
           ),

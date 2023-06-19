@@ -61,5 +61,6 @@
   "anonymousUsername": "Anonymous Hero",
   "noMoreData": "No more data",
   "noData": "No data",
-  "dataNotFound": "Data not found"
+  "dataNotFound": "Data not found",
+  "otherContent": "Other content"
 }

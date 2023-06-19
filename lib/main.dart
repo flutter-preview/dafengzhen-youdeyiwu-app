@@ -8,6 +8,7 @@ import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
 import 'package:youdeyiwu_app/common/app_theme_data.dart';
 import 'package:youdeyiwu_app/constants/app_constant.dart';
 import 'package:youdeyiwu_app/constants/app_routes.dart';
+import 'package:youdeyiwu_app/content/bloc/content_bloc.dart';
 import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
 import 'package:youdeyiwu_app/login/login.dart';
@@ -35,6 +36,9 @@ class MyApp extends MultiBlocProvider {
             ),
             BlocProvider(
               create: (context) => HomeBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ContentBloc(),
             ),
             BlocProvider(
               create: (context) => LoginBloc(),

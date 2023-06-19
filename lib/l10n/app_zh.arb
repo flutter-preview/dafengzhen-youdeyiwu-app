@@ -1,7 +1,7 @@
 {
-  "@@locale" : "zh",
-  "appName" : "尤得一物",
-  "appNameAbbr" : "youdeyiwu",
+  "@@locale": "zh",
+  "appName": "尤得一物",
+  "appNameAbbr": "youdeyiwu",
   "accountExists": "已经存在账号?",
   "loginStart": "开始登录吧",
   "welcomeMessage": "欢迎来到{appName}",
@@ -61,5 +61,6 @@
   "anonymousUsername": "无名大侠",
   "noMoreData": "暂无更多数据",
   "noData": "暂无数据",
-  "dataNotFound": "数据不存在"
+  "dataNotFound": "数据不存在",
+  "otherContent": "其他内容"
 }
