@@ -1,22 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
-import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/model/vo/page_vo.dart';
 import 'package:youdeyiwu_app/model/vo/post/post_vo.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
 
-Widget buildAllPost({
+Widget buildPosts({
   required BuildContext context,
   PageVo<PostVo>? postData,
   bool? isLoading,
 }) {
   List<Widget> postWidgets = [];
-  var currentSelectedSection =
-      context.read<HomeBloc>().state.currentSelectedSection;
   var content = postData?.content;
 
   if (content != null) {
@@ -162,34 +158,9 @@ Widget buildAllPost({
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            AppLocalizations.of(context)!.allPost,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          if (currentSelectedSection != null)
-            TextButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                textStyle: MaterialStatePropertyAll(
-                  Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.more,
-                  ),
-                  const Icon(
-                    Icons.chevron_right,
-                  ),
-                ],
-              ),
-            ),
-        ],
+      Text(
+        AppLocalizations.of(context)!.allPost,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       SizedBox(
         height: 8.h,

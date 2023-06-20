@@ -9,4 +9,12 @@ class AppRoutes {
   static const privacyPolicy = "/register";
 
   static const terms = "/terms";
+
+  static const content = "/section";
+
+  static const contentId = "/sections";
+
+  static const message = "/message";
+
+  static const user = "/user";
 }

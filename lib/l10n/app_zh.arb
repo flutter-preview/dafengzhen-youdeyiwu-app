@@ -62,5 +62,7 @@
   "noMoreData": "暂无更多数据",
   "noData": "暂无数据",
   "dataNotFound": "数据不存在",
-  "otherContent": "其他内容"
+  "otherContent": "其他内容",
+  "allTag": "所有标签",
+  "emptyContentId": "内容 Id 不能为空"
 }

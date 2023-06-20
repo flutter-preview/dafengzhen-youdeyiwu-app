@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
+import 'package:youdeyiwu_app/app/bloc/app_event.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/home/bloc/home_controller.dart';
 import 'package:youdeyiwu_app/home/bloc/home_event.dart';
@@ -25,7 +28,10 @@ Widget buildAllContent({
             style: Theme.of(context).textTheme.titleLarge,
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<AppBloc>().add(const TriggerAppEvent(1, 1));
+              Navigator.of(context).pushNamed(AppRoutes.content);
+            },
             style: ButtonStyle(
               textStyle: MaterialStatePropertyAll(
                 Theme.of(context).textTheme.titleMedium,
@@ -36,7 +42,7 @@ Widget buildAllContent({
                 Text(
                   AppLocalizations.of(context)!.more,
                 ),
-                Icon(
+                const Icon(
                   Icons.chevron_right,
                 ),
               ],
@@ -48,7 +54,7 @@ Widget buildAllContent({
         height: 8.h,
       ),
       if (sections.isNotEmpty)
-        Container(
+        SizedBox(
           height: 105.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,

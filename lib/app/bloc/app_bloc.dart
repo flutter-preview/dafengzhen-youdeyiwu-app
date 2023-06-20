@@ -6,7 +6,7 @@ import 'package:youdeyiwu_app/app/bloc/app_state.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc() : super(const AppState()) {
     on<TriggerAppEvent>((event, emit) {
-      emit(AppState(index: event.index));
+      emit(AppState(index: event.index, currentIndex: event.currentIndex));
     });
   }
 }

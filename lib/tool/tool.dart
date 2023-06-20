@@ -1,10 +1,15 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
+import 'package:youdeyiwu_app/app/bloc/app_event.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
 import 'package:youdeyiwu_app/constants/app_constant.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/enums/snack_bar_enum.dart';
 import 'package:youdeyiwu_app/exception/custom_exception.dart';
 import 'package:youdeyiwu_app/model/vo/user/user_avatar_vo.dart';
@@ -249,6 +254,80 @@ Widget buildBottomNoMoreDataWidget() {
         ),
       ),
     ],
+  );
+}
+
+/// buildBottomNavigationBar
+Widget buildBottomNavigationBar(
+    {required BuildContext context, bool? isOnTap}) {
+  return Container(
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          spreadRadius: 1,
+          blurRadius: 1,
+          color: Colors.grey.withOpacity(0.1),
+        )
+      ],
+    ),
+    child: BottomNavigationBar(
+      currentIndex: context.read<AppBloc>().state.currentIndex,
+      onTap: (value) {
+        context.read<AppBloc>().add(TriggerAppEvent(value, value));
+        if (isOnTap == true) {
+          if (value == 0) {
+            Navigator.of(context).pushNamed(AppRoutes.root);
+          } else if (value == 1) {
+            Navigator.of(context).pushNamed(AppRoutes.content);
+          } else if (value == 2) {
+            Navigator.of(context).pushNamed(AppRoutes.message);
+          } else if (value == 3) {
+            Navigator.of(context).pushNamed(AppRoutes.user);
+          }
+        }
+      },
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      type: BottomNavigationBarType.fixed,
+      items: const [
+        BottomNavigationBarItem(
+          label: "首页",
+          icon: SizedBox(
+            child: Icon(BootstrapIcons.house),
+          ),
+          activeIcon: SizedBox(
+            child: Icon(BootstrapIcons.house_fill),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "内容",
+          icon: SizedBox(
+            child: Icon(BootstrapIcons.card_text),
+          ),
+          activeIcon: SizedBox(
+            child: Icon(BootstrapIcons.card_heading),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "消息",
+          icon: SizedBox(
+            child: Icon(BootstrapIcons.bell),
+          ),
+          activeIcon: SizedBox(
+            child: Icon(BootstrapIcons.bell_fill),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "用户",
+          icon: SizedBox(
+            child: Icon(BootstrapIcons.person),
+          ),
+          activeIcon: SizedBox(
+            child: Icon(BootstrapIcons.person_fill),
+          ),
+        ),
+      ],
+    ),
   );
 }
 

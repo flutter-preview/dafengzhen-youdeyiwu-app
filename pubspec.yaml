@@ -44,13 +44,15 @@ dependencies:
   flutter_screenutil: ^5.8.4
   google_fonts: ^5.0.0
   bootstrap_icons: ^1.10.5+2
-  flutter_svg: ^2.0.6
+  flutter_svg:
   url_launcher: ^6.1.11
   flutter_dotenv: ^5.1.0
   encrypt: ^5.0.1
   json_annotation: ^4.8.1
   logger: ^1.4.0
   easy_debounce: ^2.0.3
+  flutter_html: ^3.0.0-beta.2
+  flutter_html_all: ^3.0.0-beta.2
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
 
   build_runner: ^2.4.5
   json_serializable: ^6.7.0

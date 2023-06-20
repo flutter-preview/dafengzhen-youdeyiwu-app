@@ -62,5 +62,7 @@
   "noMoreData": "No more data",
   "noData": "No data",
   "dataNotFound": "Data not found",
-  "otherContent": "Other content"
+  "otherContent": "Other content",
+  "allTag": "All tags",
+  "emptyContentId": "Content Id cannot be empty"
 }

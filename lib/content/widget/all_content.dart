@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/model/vo/section/section_client_vo.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
 
@@ -56,7 +57,11 @@ Widget buildAllContent({
                   children: columnChildren,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                var id = section.id;
+                Navigator.of(context).pushNamed("${AppRoutes.contentId}/$id",
+                    arguments: {"id": id});
+              },
             );
           }).toList(),
         ),

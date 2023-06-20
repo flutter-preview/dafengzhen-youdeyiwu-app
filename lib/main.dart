@@ -9,6 +9,8 @@ import 'package:youdeyiwu_app/common/app_theme_data.dart';
 import 'package:youdeyiwu_app/constants/app_constant.dart';
 import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/content/bloc/content_bloc.dart';
+import 'package:youdeyiwu_app/contentid/bloc/content_id_bloc.dart';
+import 'package:youdeyiwu_app/contentid/content_id.dart';
 import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
 import 'package:youdeyiwu_app/login/login.dart';
@@ -23,57 +25,80 @@ void main() async {
   runApp(MyApp());
 }
 
-/// MyApp
-class MyApp extends MultiBlocProvider {
-  MyApp({super.key})
-      : super(
-          providers: [
-            BlocProvider(
-              create: (context) => GlobalBloc(),
-            ),
-            BlocProvider(
-              create: (context) => AppBloc(),
-            ),
-            BlocProvider(
-              create: (context) => HomeBloc(),
-            ),
-            BlocProvider(
-              create: (context) => ContentBloc(),
-            ),
-            BlocProvider(
-              create: (context) => LoginBloc(),
-            ),
-            BlocProvider(
-              create: (context) => RegisterBloc(),
-            ),
-          ],
-          child: ScreenUtilInit(
-            designSize: const Size(390, 844),
-            builder: (context, child) => MaterialApp(
-              locale: const Locale("zh"),
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              debugShowCheckedModeBanner: false,
-              title: 'youdeyiwu',
-              onGenerateTitle: (context) => dotenv.get(AppConstant.appNameAbbr),
-              theme: AppThemeData.lightTheme,
-              darkTheme: AppThemeData.darkTheme,
-              themeMode: ThemeMode.light,
-              onGenerateRoute: (RouteSettings settings) {
-                print("name => ${settings.name}");
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: _buildBlocProviders(),
+      child: _buildApp(),
+    );
+  }
 
-                if (settings.name == AppRoutes.login) {
-                  return MaterialPageRoute(
-                      builder: (_) => const Login(), settings: settings);
-                } else if (settings.name == AppRoutes.register) {
-                  return MaterialPageRoute(
-                      builder: (_) => const Register(), settings: settings);
-                }
+  List<BlocProvider> _buildBlocProviders() {
+    return [
+      BlocProvider<GlobalBloc>(create: (_) => GlobalBloc()),
+      BlocProvider<AppBloc>(create: (_) => AppBloc()),
+      BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
+      BlocProvider<ContentBloc>(create: (_) => ContentBloc()),
+      BlocProvider<ContentIdBloc>(create: (_) => ContentIdBloc()),
+      BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
+      BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
+    ];
+  }
 
-                return MaterialPageRoute(
-                    builder: (_) => const App(), settings: settings);
-              },
-            ),
-          ),
-        );
+  Widget _buildApp() {
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      builder: (context, child) => _buildMaterialApp(context),
+    );
+  }
+
+  Widget _buildMaterialApp(BuildContext context) {
+    return MaterialApp(
+      locale: const Locale("zh"),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      title: 'youdeyiwu',
+      onGenerateTitle: (context) => dotenv.get(AppConstant.appNameAbbr),
+      theme: AppThemeData.lightTheme,
+      darkTheme: AppThemeData.darkTheme,
+      themeMode: ThemeMode.light,
+      onGenerateRoute: (RouteSettings settings) =>
+          _generateRoute(context, settings),
+    );
+  }
+
+  Route<dynamic> _generateRoute(BuildContext context, RouteSettings settings) {
+    print("name => ${settings.name}");
+
+    final routeBuilder = AppConfig.getRoutes(
+        context: context, settings: settings)[settings.name];
+    return MaterialPageRoute(
+      builder: routeBuilder ?? (_) => const App(),
+      settings: settings,
+    );
+  }
+}
+
+class AppConfig {
+  static Map<String, WidgetBuilder> getRoutes({
+    required BuildContext context,
+    required RouteSettings settings,
+  }) {
+    final routes = <String, WidgetBuilder>{
+      AppRoutes.login: (_) => const Login(),
+      AppRoutes.register: (_) => const Register(),
+    };
+
+    if (settings.name!.startsWith(AppRoutes.contentId)) {
+      final id =
+          RegExp(r'^/sections/(\d+)$').firstMatch(settings.name!)?.group(1);
+      if (id != null) {
+        routes[settings.name!] = (_) => const ContentId();
+      }
+    }
+
+    return routes;
+  }
 }

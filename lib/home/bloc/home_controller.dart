@@ -73,7 +73,10 @@ class HomeController {
     try {
       context.read<HomeBloc>().add(const UpdateIsLoadingHomeEvent(true));
       var vo = await SectionApi.queryDetails(
-          id: sectionId, queryParam: QueryParamDto(tagId: tagId?.toString()));
+        apiClient: apiClient,
+        id: sectionId,
+        queryParam: QueryParamDto(tagId: tagId?.toString()),
+      );
       context.read<HomeBloc>().add(UpdateDataHomeEvent(postData: vo.data));
     } catch (e, stackTrace) {
       showSnackBar(context: context, e: e, stackTrace: stackTrace);
@@ -99,11 +102,12 @@ class HomeController {
   }
 
   /// LoadMorePostData
-  Future<void> LoadMorePostData() async {
+  Future<void> LoadMorePostData({String? name}) async {
     var apiClient = ApiClient();
     try {
       context.read<HomeBloc>().add(const UpdateIsLoadingHomeEvent(true));
       var state = context.read<HomeBloc>().state;
+      var searchEnabled = state.searchEnabled;
       var currentSelectedSection = state.currentSelectedSection;
       var pageable = state.postData?.pageable;
 
@@ -124,13 +128,16 @@ class HomeController {
       );
       var vo;
 
-      if (currentSelectedSection == null) {
+      if (searchEnabled == true && name != null && name.isNotEmpty) {
+        vo = await SearchApi.searchPost(apiClient: apiClient, name: name);
+      } else if (currentSelectedSection == null) {
         vo = await PostApi.queryAll(
           apiClient: apiClient,
           queryParam: queryParam,
         );
       } else {
         vo = await SectionApi.queryDetails(
+          apiClient: apiClient,
           id: currentSelectedSection.id,
           queryParam: queryParam,
         );

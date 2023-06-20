@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      _homeController.LoadMorePostData();
+      _homeController.LoadMorePostData(name: searchController.text);
     }
   }
 
