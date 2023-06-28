@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:youdeyiwu_app/constants/app_constant.dart';
 import 'package:youdeyiwu_app/exception/custom_exception.dart';
 import 'package:youdeyiwu_app/model/response/data_response.dart';
+import 'package:youdeyiwu_app/service/global/global_service.dart';
 
 /// ApiClient
 class ApiClient extends http.BaseClient {
@@ -12,9 +13,15 @@ class ApiClient extends http.BaseClient {
   final http.Client _inner = http.Client();
   final contentTypeName = "content-type";
   final contentTypeValue = "application/json";
+  final authorization = "authorization";
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {
+    var token = GlobalService.storageService.getTokenVo()?.token;
+    if (token != null) {
+      request.headers.putIfAbsent(authorization, () => "Bearer $token");
+    }
+
     return _inner.send(request).then((response) async {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return response;
@@ -34,11 +41,11 @@ class ApiClient extends http.BaseClient {
   @override
   Future<http.Response> post(Uri url,
       {Map<String, String>? headers, dynamic body, Encoding? encoding}) {
-    var newHeaders = headers ?? {};
-    newHeaders.putIfAbsent(contentTypeName, () => contentTypeValue);
-    var newBody = newHeaders[contentTypeName] == contentTypeValue
-        ? json.encode(body.toJson())
-        : body;
+    var newHeaders = (headers ?? {})..[contentTypeName] ??= contentTypeValue;
+    var newBody =
+        (newHeaders[contentTypeName] == contentTypeValue && body != null)
+            ? json.encode(body.toJson())
+            : body;
     return super.post(baseUri.resolveUri(url),
         headers: newHeaders, body: newBody, encoding: encoding);
   }
@@ -46,11 +53,11 @@ class ApiClient extends http.BaseClient {
   @override
   Future<http.Response> put(Uri url,
       {Map<String, String>? headers, dynamic body, Encoding? encoding}) {
-    var newHeaders = headers ?? {};
-    newHeaders.putIfAbsent(contentTypeName, () => contentTypeValue);
-    var newBody = newHeaders[contentTypeName] == contentTypeValue
-        ? json.encode(body.toJson())
-        : body;
+    var newHeaders = (headers ?? {})..[contentTypeName] ??= contentTypeValue;
+    var newBody =
+        (newHeaders[contentTypeName] == contentTypeValue && body != null)
+            ? json.encode(body.toJson())
+            : body;
     return super.put(baseUri.resolveUri(url),
         headers: newHeaders, body: newBody, encoding: encoding);
   }
@@ -58,11 +65,11 @@ class ApiClient extends http.BaseClient {
   @override
   Future<http.Response> patch(Uri url,
       {Map<String, String>? headers, dynamic body, Encoding? encoding}) {
-    var newHeaders = headers ?? {};
-    newHeaders.putIfAbsent(contentTypeName, () => contentTypeValue);
-    var newBody = newHeaders[contentTypeName] == contentTypeValue
-        ? json.encode(body.toJson())
-        : body;
+    var newHeaders = (headers ?? {})..[contentTypeName] ??= contentTypeValue;
+    var newBody =
+        (newHeaders[contentTypeName] == contentTypeValue && body != null)
+            ? json.encode(body.toJson())
+            : body;
     return super.patch(baseUri.resolveUri(url),
         headers: newHeaders, body: newBody, encoding: encoding);
   }
@@ -70,11 +77,11 @@ class ApiClient extends http.BaseClient {
   @override
   Future<http.Response> delete(Uri url,
       {Map<String, String>? headers, dynamic body, Encoding? encoding}) {
-    var newHeaders = headers ?? {};
-    newHeaders.putIfAbsent(contentTypeName, () => contentTypeValue);
-    var newBody = newHeaders[contentTypeName] == contentTypeValue
-        ? json.encode(body.toJson())
-        : body;
+    var newHeaders = (headers ?? {})..[contentTypeName] ??= contentTypeValue;
+    var newBody =
+        (newHeaders[contentTypeName] == contentTypeValue && body != null)
+            ? json.encode(body.toJson())
+            : body;
     return super.delete(baseUri.resolveUri(url),
         headers: newHeaders, body: newBody, encoding: encoding);
   }

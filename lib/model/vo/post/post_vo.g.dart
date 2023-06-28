@@ -18,7 +18,9 @@ PostVo _$PostVoFromJson(Map<String, dynamic> json) => PostVo(
       styles: (json['styles'] as List<dynamic>)
           .map((e) => StyleVo.fromJson(e as Map<String, dynamic>))
           .toList(),
-      details: PostDetailsVo.fromJson(json['details'] as Map<String, dynamic>),
+      details: json['details'] == null
+          ? null
+          : PostDetailsVo.fromJson(json['details'] as Map<String, dynamic>),
       section: SectionVo.fromJson(json['section'] as Map<String, dynamic>),
       customTags: (json['customTags'] as List<dynamic>)
           .map((e) => e as String)
@@ -66,7 +68,7 @@ Map<String, dynamic> _$PostVoToJson(PostVo instance) {
   val['images'] = instance.images;
   val['badges'] = instance.badges;
   val['styles'] = instance.styles;
-  val['details'] = instance.details;
+  writeNotNull('details', instance.details);
   val['section'] = instance.section;
   return val;
 }

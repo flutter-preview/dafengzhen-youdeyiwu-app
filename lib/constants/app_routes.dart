@@ -14,6 +14,8 @@ class AppRoutes {
 
   static const contentId = "/sections";
 
+  static const postId = "/posts";
+
   static const message = "/message";
 
   static const user = "/user";

@@ -22,15 +22,16 @@ Widget buildPosts({
       List<Widget> detailsChildren = [];
       List<Widget> images = [];
 
-      if (post.details.likeCount > 0) {
-        detailsChildren.add(Text("点赞 ${formatCount(post.details.likeCount)}"));
+      if (post.details!.likeCount > 0) {
+        detailsChildren.add(Text("点赞 ${formatCount(post.details!.likeCount)}"));
       }
-      if (post.details.commentCount > 0) {
+      if (post.details!.commentCount > 0) {
         detailsChildren
-            .add(Text("评论 ${formatCount(post.details.commentCount)}"));
+            .add(Text("评论 ${formatCount(post.details!.commentCount)}"));
       }
-      if (post.details.replyCount > 0) {
-        detailsChildren.add(Text("回复 ${formatCount(post.details.replyCount)}"));
+      if (post.details!.replyCount > 0) {
+        detailsChildren
+            .add(Text("回复 ${formatCount(post.details!.replyCount)}"));
       }
 
       for (var image in post.images) {

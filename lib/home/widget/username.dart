@@ -17,22 +17,22 @@ Widget buildUsername({required BuildContext context}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      SizedBox(
-        height: 56.h,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.hello,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Text(
-              alias,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ],
-        ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.hello,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Text(
+            alias,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ],
       ),
       SizedBox(
         width: 56.w,

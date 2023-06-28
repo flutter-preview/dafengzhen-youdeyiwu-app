@@ -64,5 +64,22 @@
   "dataNotFound": "Data not found",
   "otherContent": "Other content",
   "allTag": "All tags",
-  "emptyContentId": "Content Id cannot be empty"
+  "emptyContentId": "Content Id cannot be empty",
+  "showMoreButtonClicked": "Click to see more replies",
+  "userInput": "Please enter the reply content",
+  "reply": "Reply",
+  "cancel": "Cancel",
+  "save": "Save",
+  "comment": "Comment",
+  "like": "Like",
+  "follow": "Follow",
+  "share": "Share",
+  "favorite": "Favorite",
+  "clipboardText": "Copied to clipboard",
+  "notLoggedIn": "You are not logged in",
+  "login": "Login",
+  "warmReminder": "Warm reminder",
+  "loginRequiredMessage": "You need to log in to continue, would you like to go to the login page?",
+  "replyFinished": "Reply finished",
+  "great": "That's great!"
 }

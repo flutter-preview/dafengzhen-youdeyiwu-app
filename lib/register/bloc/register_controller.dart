@@ -113,9 +113,10 @@ class RegisterController {
           context: context,
           e: AppLocalizations.of(context)!.reloadingSoon,
           type: SnackBarTypeEnum.primary,
-          duration: Duration(milliseconds: 1500));
+          duration: Duration(milliseconds: 1200));
 
       await Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pop();
         Navigator.of(context).pushNamedAndRemoveUntil(
           AppRoutes.root,
           (route) => false,
@@ -123,9 +124,9 @@ class RegisterController {
       });
     } catch (e, stackTrace) {
       showSnackBar(context: context, e: e, stackTrace: stackTrace);
+      Navigator.of(context).pop();
     } finally {
       apiClient.close();
-      Navigator.of(context).pop();
     }
   }
 }

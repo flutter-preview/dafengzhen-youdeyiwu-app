@@ -64,5 +64,22 @@
   "dataNotFound": "数据不存在",
   "otherContent": "其他内容",
   "allTag": "所有标签",
-  "emptyContentId": "内容 Id 不能为空"
+  "emptyContentId": "内容 Id 不能为空",
+  "showMoreButtonClicked": "查看更多回复",
+  "userInput": "请输入回复内容",
+  "reply": "回复",
+  "cancel": "取消",
+  "save": "保存",
+  "comment": "评论",
+  "like": "点赞",
+  "follow": "关注",
+  "share": "分享",
+  "favorite": "收藏",
+  "clipboardText": "已复制到剪贴板",
+  "notLoggedIn": "您还未登录",
+  "login": "登录",
+  "warmReminder": "温馨提示",
+  "loginRequiredMessage": "您需要登录才能继续操作，是否前往登录页?",
+  "replyFinished": "回复完成",
+  "great": "这太棒了!"
 }

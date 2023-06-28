@@ -21,7 +21,7 @@ class PostVo extends BaseVo {
   List<String> images;
   List<BadgeVo> badges;
   List<StyleVo> styles;
-  PostDetailsVo details;
+  PostDetailsVo? details;
   SectionVo section;
 
   PostVo({
@@ -32,7 +32,7 @@ class PostVo extends BaseVo {
     this.statement,
     required this.badges,
     required this.styles,
-    required this.details,
+    this.details,
     required this.section,
     required this.customTags,
     required this.images,

@@ -103,7 +103,7 @@ class LoginController {
           context: context,
           e: AppLocalizations.of(context)!.reloadingSoon,
           type: SnackBarTypeEnum.primary,
-          duration: Duration(milliseconds: 1500));
+          duration: Duration(milliseconds: 1200));
 
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -113,9 +113,9 @@ class LoginController {
       });
     } catch (e, stackTrace) {
       showSnackBar(context: context, e: e, stackTrace: stackTrace);
+      Navigator.of(context).pop();
     } finally {
       apiClient.close();
-      Navigator.of(context).pop();
     }
   }
 }

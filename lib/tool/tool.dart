@@ -18,18 +18,19 @@ import 'package:youdeyiwu_app/model/vo/user/user_vo.dart';
 import 'package:youdeyiwu_app/service/global/global_service.dart';
 
 /// showSnackBar
-void showSnackBar(
-    {required BuildContext context,
-    dynamic e,
-    dynamic stackTrace,
-    SnackBarTypeEnum type = SnackBarTypeEnum.danger,
-    Duration? duration}) {
+void showSnackBar({
+  required BuildContext context,
+  dynamic e,
+  dynamic stackTrace,
+  SnackBarTypeEnum type = SnackBarTypeEnum.danger,
+  Duration? duration,
+}) {
   String message = AppLocalizations.of(context)!.unknownError;
   if (e is CustomException) {
-    GlobalService.logger.e('Custom exception', e, stackTrace);
+    GlobalService.logger.e('Custom exception or message', e, stackTrace);
     message = e.message;
   } else {
-    GlobalService.logger.e('Unknown exception', e, stackTrace);
+    GlobalService.logger.e('Unknown exception or message', e, stackTrace);
     message = e.toString();
   }
 
@@ -120,8 +121,12 @@ UserAvatarVo getUserAvatar(UserVo user) {
 }
 
 /// getUserOvAvatarObject
-ImageProvider<Object> getUserOvAvatarObject(
-    {required UserOvVo user, bool? small, bool? medium, bool? large}) {
+ImageProvider<Object> getUserOvAvatarObject({
+  required UserOvVo user,
+  bool? small,
+  bool? medium = true,
+  bool? large,
+}) {
   var userOvAvatar = getUserOvAvatar(user);
   String? avatarUrl;
 
@@ -170,10 +175,16 @@ String formatCount(int count) {
 
 /// toRelativeTime
 String toRelativeTime({required BuildContext context, required String time}) {
-  final currentTime = DateTime.now();
-  final parsedTime = DateTime.parse(time);
-  final diff = currentTime.difference(parsedTime);
+  var currentTime = DateTime.now().toLocal();
+  var parsedTime = DateTime.parse(time).toLocal();
 
+  if (currentTime.isBefore(parsedTime)) {
+    final temp = parsedTime;
+    parsedTime = currentTime;
+    currentTime = temp;
+  }
+
+  var diff = currentTime.difference(parsedTime);
   if (diff.inSeconds < 60) {
     return '${diff.inSeconds} ${AppLocalizations.of(context)!.secondsAgo}';
   } else if (diff.inMinutes < 60) {
@@ -286,8 +297,6 @@ Widget buildBottomNavigationBar(
           }
         }
       },
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
       type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(

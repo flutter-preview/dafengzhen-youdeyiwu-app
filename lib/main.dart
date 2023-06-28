@@ -14,6 +14,8 @@ import 'package:youdeyiwu_app/contentid/content_id.dart';
 import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
 import 'package:youdeyiwu_app/login/login.dart';
+import 'package:youdeyiwu_app/postid/bloc/post_id_bloc.dart';
+import 'package:youdeyiwu_app/postid/post_id.dart';
 import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
 import 'package:youdeyiwu_app/register/register.dart';
 import 'package:youdeyiwu_app/service/global/bloc/global_bloc.dart';
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<ContentBloc>(create: (_) => ContentBloc()),
       BlocProvider<ContentIdBloc>(create: (_) => ContentIdBloc()),
+      BlocProvider<PostIdBloc>(create: (_) => PostIdBloc()),
       BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
       BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
     ];
@@ -89,6 +92,7 @@ class AppConfig {
     final routes = <String, WidgetBuilder>{
       AppRoutes.login: (_) => const Login(),
       AppRoutes.register: (_) => const Register(),
+      AppRoutes.root: (_) => const App(),
     };
 
     if (settings.name!.startsWith(AppRoutes.contentId)) {
@@ -96,6 +100,11 @@ class AppConfig {
           RegExp(r'^/sections/(\d+)$').firstMatch(settings.name!)?.group(1);
       if (id != null) {
         routes[settings.name!] = (_) => const ContentId();
+      }
+    } else if (settings.name!.startsWith(AppRoutes.postId)) {
+      final id = RegExp(r'^/posts/(\d+)$').firstMatch(settings.name!)?.group(1);
+      if (id != null) {
+        routes[settings.name!] = (_) => const PostId();
       }
     }
 
