@@ -28,7 +28,11 @@ class ApiClient extends http.BaseClient {
       } else {
         var str = await response.stream.bytesToString();
         var body = jsonDecode(str) as Map<String, dynamic>;
-        throw CustomException.withDataResponse(DataResponse.fromJson(body));
+        var dataResponse = DataResponse.fromJson(body);
+        if (dataResponse.code == 4010 || dataResponse.code == 4011) {
+          GlobalService.storageService.removeTokenVo();
+        }
+        throw CustomException.withDataResponse(dataResponse);
       }
     });
   }

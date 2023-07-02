@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/model/vo/user/user_ov_vo.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
 
@@ -25,9 +26,18 @@ Widget buildPostName({
             SizedBox(
               height: 8.h,
             ),
-            Text(
-              user.alias + "  ${toRelativeTime(context: context, time: time)}",
-              style: Theme.of(context).textTheme.titleMedium,
+            InkWell(
+              onTap: () {
+                var id = user.id;
+                Navigator.of(context)
+                    .pushNamed("${AppRoutes.userId}/$id", arguments: {
+                  "id": id,
+                });
+              },
+              child: Text(
+                "${user.alias}  ${toRelativeTime(context: context, time: time)}",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
           ],
         ),
@@ -35,8 +45,17 @@ Widget buildPostName({
       SizedBox(
         width: 56.w,
         height: 56.h,
-        child: CircleAvatar(
-          backgroundImage: getUserOvAvatarObject(user: user),
+        child: InkWell(
+          child: CircleAvatar(
+            backgroundImage: getUserOvAvatarObject(user: user),
+          ),
+          onTap: () {
+            var id = user.id;
+            Navigator.of(context)
+                .pushNamed("${AppRoutes.userId}/$id", arguments: {
+              "id": id,
+            });
+          },
         ),
       )
     ],

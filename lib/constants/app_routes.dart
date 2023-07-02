@@ -6,9 +6,9 @@ class AppRoutes {
 
   static const register = "/register";
 
-  static const privacyPolicy = "/register";
-
   static const terms = "/terms";
+
+  static const privacy = "/privacy";
 
   static const content = "/section";
 
@@ -19,4 +19,6 @@ class AppRoutes {
   static const message = "/message";
 
   static const user = "/user";
+
+  static const userId = "/users";
 }

@@ -137,7 +137,14 @@ Widget buildAllPost({
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            var id = post.user!.id;
+                            Navigator.of(context).pushNamed(
+                                "${AppRoutes.userId}/$id",
+                                arguments: {
+                                  "id": id,
+                                });
+                          },
                           child: Text(
                             post.user!.alias,
                             overflow: TextOverflow.ellipsis,

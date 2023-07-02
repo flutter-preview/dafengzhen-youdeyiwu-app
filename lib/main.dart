@@ -14,12 +14,18 @@ import 'package:youdeyiwu_app/contentid/content_id.dart';
 import 'package:youdeyiwu_app/home/bloc/home_bloc.dart';
 import 'package:youdeyiwu_app/login/bloc/login_bloc.dart';
 import 'package:youdeyiwu_app/login/login.dart';
+import 'package:youdeyiwu_app/message/bloc/message_bloc.dart';
 import 'package:youdeyiwu_app/postid/bloc/post_id_bloc.dart';
 import 'package:youdeyiwu_app/postid/post_id.dart';
+import 'package:youdeyiwu_app/privacy/privacy.dart';
 import 'package:youdeyiwu_app/register/bloc/register_bloc.dart';
 import 'package:youdeyiwu_app/register/register.dart';
 import 'package:youdeyiwu_app/service/global/bloc/global_bloc.dart';
 import 'package:youdeyiwu_app/service/global/global_service.dart';
+import 'package:youdeyiwu_app/terms/terms.dart';
+import 'package:youdeyiwu_app/user/bloc/user_bloc.dart';
+import 'package:youdeyiwu_app/userid/bloc/user_id_bloc.dart';
+import 'package:youdeyiwu_app/userid/user_id.dart';
 
 /// main
 void main() async {
@@ -42,8 +48,11 @@ class MyApp extends StatelessWidget {
       BlocProvider<AppBloc>(create: (_) => AppBloc()),
       BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
       BlocProvider<ContentBloc>(create: (_) => ContentBloc()),
+      BlocProvider<MessageBloc>(create: (_) => MessageBloc()),
+      BlocProvider<UserBloc>(create: (_) => UserBloc()),
       BlocProvider<ContentIdBloc>(create: (_) => ContentIdBloc()),
       BlocProvider<PostIdBloc>(create: (_) => PostIdBloc()),
+      BlocProvider<UserIdBloc>(create: (_) => UserIdBloc()),
       BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
       BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
     ];
@@ -92,6 +101,8 @@ class AppConfig {
     final routes = <String, WidgetBuilder>{
       AppRoutes.login: (_) => const Login(),
       AppRoutes.register: (_) => const Register(),
+      AppRoutes.terms: (_) => const Terms(),
+      AppRoutes.privacy: (_) => const Privacy(),
       AppRoutes.root: (_) => const App(),
     };
 
@@ -105,6 +116,11 @@ class AppConfig {
       final id = RegExp(r'^/posts/(\d+)$').firstMatch(settings.name!)?.group(1);
       if (id != null) {
         routes[settings.name!] = (_) => const PostId();
+      }
+    } else if (settings.name!.startsWith(AppRoutes.userId)) {
+      final id = RegExp(r'^/users/(\d+)$').firstMatch(settings.name!)?.group(1);
+      if (id != null) {
+        routes[settings.name!] = (_) => const UserId();
       }
     }
 

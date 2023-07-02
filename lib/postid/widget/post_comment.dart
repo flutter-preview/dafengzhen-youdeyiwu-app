@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/model/vo/comment/post_comment_vo.dart';
 import 'package:youdeyiwu_app/model/vo/page_vo.dart';
 import 'package:youdeyiwu_app/model/vo/user/user_ov_vo.dart';
@@ -24,9 +25,7 @@ Widget buildPostComment({
         context: context, element: entry.value, right: entry.key % 2 != 0);
   }).toList();
 
-  if (children.isEmpty) {
-    children.add(buildNoMoreDataWidget(context: context, nodata: true));
-  } else {
+  if (children.isNotEmpty) {
     children.add(buildBottomNoMoreDataWidget());
   }
 
@@ -82,7 +81,13 @@ Widget buildUsername({
       width: 56.w,
       height: 56.h,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          var id = user.id;
+          Navigator.of(context)
+              .pushNamed("${AppRoutes.userId}/$id", arguments: {
+            "id": id,
+          });
+        },
         child: CircleAvatar(
           backgroundImage: getUserOvAvatarObject(user: user),
         ),
@@ -100,6 +105,13 @@ Widget buildUsername({
             child: Text(
               user.alias,
             ),
+            onTap: () {
+              var id = user.id;
+              Navigator.of(context)
+                  .pushNamed("${AppRoutes.userId}/$id", arguments: {
+                "id": id,
+              });
+            },
           ),
           SizedBox(
             height: 6.h,

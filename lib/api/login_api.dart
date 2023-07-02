@@ -14,4 +14,8 @@ class LoginApi {
         jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     return TokenVo.withDataResponse(decodedResponse);
   }
+
+  static Future<void> logout({ApiClient? apiClient}) async {
+    await (apiClient ?? ApiClient()).get(Uri.parse("/logout"));
+  }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/model/vo/reply/post_comment_child_reply_vo.dart';
 import 'package:youdeyiwu_app/model/vo/reply/post_comment_parent_reply_vo.dart';
 import 'package:youdeyiwu_app/model/vo/user/user_ov_vo.dart';
@@ -133,7 +134,13 @@ Widget buildUsername({
       width: 56.w,
       height: 56.h,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          var id = user.id;
+          Navigator.of(context)
+              .pushNamed("${AppRoutes.userId}/$id", arguments: {
+            "id": id,
+          });
+        },
         child: CircleAvatar(
           backgroundImage: getUserOvAvatarObject(user: user),
         ),
@@ -151,6 +158,13 @@ Widget buildUsername({
             child: Text(
               user.alias,
             ),
+            onTap: () {
+              var id = user.id;
+              Navigator.of(context)
+                  .pushNamed("${AppRoutes.userId}/$id", arguments: {
+                "id": id,
+              });
+            },
           ),
           SizedBox(
             height: 6.h,

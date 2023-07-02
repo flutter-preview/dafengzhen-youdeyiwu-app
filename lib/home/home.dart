@@ -87,6 +87,7 @@ class _HomeState extends State<Home> {
             onRefresh: _refresh,
             child: ListView(
               controller: _scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
               children: [
                 buildUsername(context: context),
                 SizedBox(

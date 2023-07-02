@@ -4,7 +4,9 @@ import 'package:youdeyiwu_app/app/bloc/app_bloc.dart';
 import 'package:youdeyiwu_app/app/bloc/app_state.dart';
 import 'package:youdeyiwu_app/content/content.dart';
 import 'package:youdeyiwu_app/home/home.dart';
+import 'package:youdeyiwu_app/message/message.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
+import 'package:youdeyiwu_app/user/user.dart';
 
 /// App
 class App extends StatefulWidget {
@@ -20,14 +22,10 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(builder: (context, state) {
       Widget? body = [
-        Home(),
-        Content(),
-        Center(
-          child: Text("3"),
-        ),
-        Center(
-          child: Text("4"),
-        ),
+        const Home(),
+        const Content(),
+        const Message(),
+        const User(),
       ][state.currentIndex];
 
       return SafeArea(

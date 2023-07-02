@@ -32,4 +32,8 @@ class StorageService {
     }
     return null;
   }
+
+  Future<void> removeTokenVo() async {
+    await remove(AppConstant.tokenVoStorage);
+  }
 }

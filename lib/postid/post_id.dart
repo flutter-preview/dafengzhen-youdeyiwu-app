@@ -69,46 +69,67 @@ class _PostIdState extends State<PostId> {
           padding: EdgeInsets.all(16.w),
           child: RefreshIndicator(
             onRefresh: _refresh,
-            child: ListView(
-              controller: _scrollController,
-              physics: const AlwaysScrollableScrollPhysics(),
-              children: state.details == null
-                  ? [buildLoadingIndicator()]
-                  : [
-                      buildPostName(
-                        context: context,
-                        name: state.details!.basic.name,
-                        time: state.details!.basic.contentUpdatedOn,
-                        user: state.details!.user,
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      buildPostContent(
-                        context: context,
-                        content: state.details!.content,
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      buildPostButton(
-                        context: context,
-                        basic: state.details!.basic,
-                        details: state.details!.details,
-                        alias: state.details!.user.alias,
-                        isLike: state.details!.isLike,
-                        isFollow: state.details!.isFollow,
-                        isFavourite: state.details!.isFavourite,
-                      ),
-                      SizedBox(
-                        height: 32.h,
-                      ),
-                      buildPostComment(
-                          context: context, data: state.details!.data),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                    ],
+            child: Stack(
+              children: [
+                ListView(
+                  controller: _scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: state.details == null
+                      ? [buildLoadingIndicator()]
+                      : [
+                          buildPostName(
+                            context: context,
+                            name: state.details!.basic.name,
+                            time: state.details!.basic.contentUpdatedOn,
+                            user: state.details!.user,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          buildPostContent(
+                            context: context,
+                            content: state.details!.content,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          if (state.details!.data.content.isNotEmpty)
+                            buildPostButton(
+                              context: context,
+                              basic: state.details!.basic,
+                              details: state.details!.details,
+                              alias: state.details!.user.alias,
+                              isLike: state.details!.isLike,
+                              isFollow: state.details!.isFollow,
+                              isFavourite: state.details!.isFavourite,
+                            ),
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          buildPostComment(
+                              context: context, data: state.details!.data),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                        ],
+                ),
+                if (state.details != null &&
+                    state.details!.data.content.isEmpty)
+                  Positioned(
+                    bottom: 20.h,
+                    left: 0,
+                    right: 0,
+                    child: buildPostButton(
+                      context: context,
+                      basic: state.details!.basic,
+                      details: state.details!.details,
+                      alias: state.details!.user.alias,
+                      isLike: state.details!.isLike,
+                      isFollow: state.details!.isFollow,
+                      isFavourite: state.details!.isFavourite,
+                    ),
+                  ),
+              ],
             ),
           ),
         ),

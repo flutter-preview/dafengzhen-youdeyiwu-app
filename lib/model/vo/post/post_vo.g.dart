@@ -10,6 +10,9 @@ PostVo _$PostVoFromJson(Map<String, dynamic> json) => PostVo(
       name: json['name'] as String,
       cover: json['cover'] as String?,
       overview: json['overview'] as String?,
+      contentType:
+          $enumDecode(_$PostContentTypeEnumEnumMap, json['contentType']),
+      contentLink: json['contentLink'] as String?,
       contentUpdatedOn: json['contentUpdatedOn'] as String,
       statement: json['statement'] as String?,
       badges: (json['badges'] as List<dynamic>)
@@ -62,6 +65,8 @@ Map<String, dynamic> _$PostVoToJson(PostVo instance) {
   val['name'] = instance.name;
   writeNotNull('cover', instance.cover);
   writeNotNull('overview', instance.overview);
+  val['contentType'] = _$PostContentTypeEnumEnumMap[instance.contentType]!;
+  writeNotNull('contentLink', instance.contentLink);
   val['contentUpdatedOn'] = instance.contentUpdatedOn;
   writeNotNull('statement', instance.statement);
   val['customTags'] = instance.customTags;
@@ -72,3 +77,9 @@ Map<String, dynamic> _$PostVoToJson(PostVo instance) {
   val['section'] = instance.section;
   return val;
 }
+
+const _$PostContentTypeEnumEnumMap = {
+  PostContentTypeEnum.DEFAULT: 'DEFAULT',
+  PostContentTypeEnum.LINK: 'LINK',
+  PostContentTypeEnum.NONE: 'NONE',
+};

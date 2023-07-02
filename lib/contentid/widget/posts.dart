@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youdeyiwu_app/common/app_colors_light.dart';
+import 'package:youdeyiwu_app/constants/app_routes.dart';
 import 'package:youdeyiwu_app/model/vo/page_vo.dart';
 import 'package:youdeyiwu_app/model/vo/post/post_vo.dart';
 import 'package:youdeyiwu_app/tool/tool.dart';
@@ -61,7 +62,13 @@ Widget buildPosts({
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
-                    recognizer: TapGestureRecognizer()..onTap = () {},
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        var id = post.id;
+                        Navigator.of(context).pushNamed(
+                            "${AppRoutes.postId}/$id",
+                            arguments: {"id": id});
+                      },
                   ),
                   WidgetSpan(
                     child: SizedBox(width: 8.w),
@@ -126,7 +133,14 @@ Widget buildPosts({
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            var id = post.user!.id;
+                            Navigator.of(context).pushNamed(
+                                "${AppRoutes.userId}/$id",
+                                arguments: {
+                                  "id": id,
+                                });
+                          },
                           child: Text(
                             post.user!.alias,
                             overflow: TextOverflow.ellipsis,

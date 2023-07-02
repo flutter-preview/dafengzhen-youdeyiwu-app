@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:youdeyiwu_app/enums/post_content_type_enum.dart';
 import 'package:youdeyiwu_app/model/response/data_response.dart';
 import 'package:youdeyiwu_app/model/vo/badge/badge_vo.dart';
 import 'package:youdeyiwu_app/model/vo/base_vo.dart';
@@ -15,6 +16,8 @@ class PostVo extends BaseVo {
   String name;
   String? cover;
   String? overview;
+  PostContentTypeEnum contentType;
+  String? contentLink;
   String contentUpdatedOn;
   String? statement;
   List<String> customTags;
@@ -28,6 +31,8 @@ class PostVo extends BaseVo {
     required this.name,
     this.cover,
     this.overview,
+    required this.contentType,
+    this.contentLink,
     required this.contentUpdatedOn,
     this.statement,
     required this.badges,

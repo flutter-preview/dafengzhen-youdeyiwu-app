@@ -7,7 +7,7 @@ abstract class GlobalEvent {
 
 /// PathGlobalEvent
 class PathGlobalEvent extends GlobalEvent {
-  final PathVo path;
+  final PathVo? path;
 
   const PathGlobalEvent(this.path) : super();
 }
